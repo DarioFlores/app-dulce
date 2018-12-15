@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/productos', function (){
+   return "Listado de Productos";
+});
+
 Route::get('/productos/{id}', function ($id){
     return "Detalles del Producto {$id}";
 })->where('id', '[0-9]+'); //Expresion regular que nos indica que solo
