@@ -6,16 +6,16 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProductosModuloTest extends TestCase
+class IngredientesModuleTest extends TestCase
 {
     /**
      * @test
      */
     public function carga_pag_lista()
     {
-        $this->get('/productos')
+        $this->get('/ingredientes')
             ->assertStatus(200)
-            ->assertSee('Listado de Productos');
+            ->assertSee('Listado de ingredientes');
     }
 
     /**
@@ -23,9 +23,9 @@ class ProductosModuloTest extends TestCase
      */
     public function carga_pag_detalles()
     {
-        $this->get('/productos/5')
+        $this->get('/ingredientes/5')
             ->assertStatus(200)
-            ->assertSee('Detalles del Producto 5');
+            ->assertSee('Detalles del ingredientes 5');
     }
 
     /**
@@ -33,9 +33,9 @@ class ProductosModuloTest extends TestCase
      */
     public function carga_pag_nuevo()
     {
-        $this->get('/productos/nuevo')
+        $this->get('/ingredientes/nuevo')
             ->assertStatus(200)
-            ->assertSee("Nuevo Producto");
+            ->assertSee("Nuevo ingredientes");
     }
 
     /**
@@ -43,8 +43,8 @@ class ProductosModuloTest extends TestCase
      */
     public function carga_pag_editar()
     {
-        $this->get('/productos/editar/5')
+        $this->get('/ingredientes/editar/5')
             ->assertStatus(200)
-            ->assertSee('Editar el Producto 5');
+            ->assertSee('Editar el ingredientes 5');
     }
 }
