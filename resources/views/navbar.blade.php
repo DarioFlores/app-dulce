@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark container">
     <div class="container">
         <a class="navbar-brand" href="#">Container</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">

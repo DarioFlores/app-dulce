@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingrediente;
 use Illuminate\Http\Request;
 
 class IngredienteController extends Controller
 {
     function lista(){
-        return "Listado de ingredientes";
+
+        $ingredientes= Ingrediente::all();
+        $titulo = 'Listado de Ingredientes';
+
+        return view('ingredientes.lista',compact('titulo','ingredientes'));
     }
 
     function detalles($id){
-        return "Detalles del ingredientes {$id}";
+        $ing = Ingrediente::find($id);
+        return view('detalles',compact('ing'));
     }
 
     function nuevo(){

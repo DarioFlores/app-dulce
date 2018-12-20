@@ -2,30 +2,58 @@
 
 namespace Tests\Feature;
 
+use App\Ingrediente;
+use App\Marca;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class IngredientesModuleTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      */
-    public function carga_pag_lista()
+    public function carga_pag_ver_lista()
     {
+        factory(Marca::class, 8)->create();
+
+        factory(Ingrediente::class)->create([
+            'nombre' => 'Leche'
+        ]);
+
+        factory(Ingrediente::class)->create([
+            'nombre' => 'Harina'
+        ]);
+
         $this->get('/ingredientes')
             ->assertStatus(200)
-            ->assertSee('Listado de ingredientes');
+            ->assertSee('Listado de Ingredientes')
+            ->assertSee('Leche')
+            ->assertSee('Harina');
+    }
+
+    public function carga_pag_lista_vacia(){
+        $this->get('/ingredientes')
+            ->assertStatus(200)
+            ->assertSee('No tenemos ingredientes aun');
     }
 
     /**
      * @test
      */
-    public function carga_pag_detalles()
+    public function carga_pag_ver_detalles_ingrediente()
     {
-        $this->get('/ingredientes/5')
+        factory(Marca::class, 8)->create();
+
+        $ing = factory(Ingrediente::class)->create([
+            'nombre' => 'Leche'
+        ]);
+
+        $this->get('/ingredientes/'.$ing->id)
             ->assertStatus(200)
-            ->assertSee('Detalles del ingredientes 5');
+            ->assertSee('Leche');
     }
 
     /**

@@ -11,7 +11,7 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="first-slide" src="img/Abu.jpg" alt="First slide">
+                <img class="first-slide" src="img/c1.jpg" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption text-left">
                         <h1>Example headline.</h1>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="second-slide" src="img/China.jpg" alt="Second slide">
+                <img class="second-slide" src="img/c2.jpg" alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Another example headline.</h1>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="third-slide" src="img/Gi.jpg" alt="Third slide">
+                <img class="third-slide" src="img/c3.jpg" alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption text-right">
                         <h1>One more for good measure.</h1>
