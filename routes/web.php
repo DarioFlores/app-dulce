@@ -24,6 +24,21 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')
     ->name('home');
 
+
+/**
+ * Rutas de User
+ */
+
+Route::get('/user', 'UserController@lista')
+    ->name('user.lista');
+
+Route::get('/user/registrar', 'UserController@registrar')
+    ->name('user.registrar');
+
+Route::post('/user/crear', 'UserController@crear')
+    ->name('user.crear');
+
+
 /**
  * Rutas de Productos
  */
@@ -59,8 +74,6 @@ Route::get('/ingredientes/{ing}', 'IngredienteController@detalles')
     ->where('ing', '[0-9]+');/*Expresion regular que nos indica que solo
  * puede recibir numeros y que puede tener mas de un numero
  */
-
-
 Route::get('/ingredientes/nuevo', 'IngredienteController@nuevo')
     ->name('ingredientes.añadir');
 
@@ -86,7 +99,3 @@ Route::get('/precio', 'PrecioController@index');
 /**
  * Rutas de Usuarios
  */
-
-Route::get('/usuario', 'UsuarioController@ingresar');
-
-Route::get('/usuario/registrar', 'UsuarioController@registrar');

@@ -85,4 +85,29 @@ class IngredientesModuleTest extends TestCase
             ->assertStatus(200)
             ->assertSee('Añadir nuevo Ingrediente');
     }
+
+    /**
+     * @test
+     */
+    public function añadir_nuevo_ingrediente()
+    {
+        $this->withoutExceptionHandling();
+        factory(Marca::class, 8)->create();
+        $marca = Marca::first();
+        //ESPERAMOS QUE CUANDO MANDENOS ESTOS DATOS POR EL FORMULARIO NOS REDIRECCIONE A LA LISTA DE INGREDIENTES
+        $this->post('/ingredientes/crear', [
+            'nombre' => 'Leche',
+            'marca_id' => $marca->id,
+        ])->assertRedirect(route('ingredientes.lista'));
+
+        // ESPERAMOS ENCONTRAR EN LA BASE DE DATOS UN INGREDIENTE CON ESTOS ATRIBUTOS
+        $this->assertDatabaseHas('ingredientes',[
+            'nombre' => 'Leche',
+            'marca_id' => $marca->id,
+        ]);
+
+        //PARA COMPROBAR SI UNA CONTRASEÑA ENCRITADA SE GUARDO CORRECTAMENTE SE USA
+        //$this->assertCredentials([/*ARRAY ASOCIATIVO CON LOS DATOS*/]);
+
+    }
 }

@@ -25,7 +25,15 @@ class IngredienteController extends Controller
     }
 
     function crear(){
-        return "Procesando Informacion...";
+
+        $data = request()->all();
+
+        Ingrediente::create([
+            'nombre' => $data['nombre'],
+            'marca_id' => $data['marca_id']
+        ]);
+
+        return redirect()->route('ingredientes.lista');
     }
 
     function editar($id){
