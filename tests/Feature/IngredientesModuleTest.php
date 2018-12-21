@@ -59,20 +59,30 @@ class IngredientesModuleTest extends TestCase
     /**
      * @test
      */
-    public function carga_pag_nuevo()
-    {
-        $this->get('/ingredientes/nuevo')
-            ->assertStatus(200)
-            ->assertSee("Nuevo ingredientes");
-    }
-
-    /**
-     * @test
-     */
     public function carga_pag_editar()
     {
         $this->get('/ingredientes/editar/5')
             ->assertStatus(200)
             ->assertSee('Editar el ingredientes 5');
+    }
+
+    /**
+     * @test
+     */
+    public function erro_404_no_encontro_un_ingrediente()
+    {
+        $this->get('/ingredientes/9999')
+            ->assertStatus(404)
+            ->assertSee('PAGINA NO ENCONTRADA');
+    }
+
+    /**
+     * @test
+     */
+    public function mostrar_formulario_añadir_ingrediente()
+    {
+        $this->get('/ingredientes/nuevo')
+            ->assertStatus(200)
+            ->assertSee('Añadir nuevo Ingrediente');
     }
 }

@@ -21,39 +21,51 @@ Route::get('/', function () {
  * Rutas de Home
  */
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')
+    ->name('home');
 
 /**
  * Rutas de Productos
  */
 
-Route::get('/productos', 'ProductoController@lista');
+Route::get('/productos', 'ProductoController@lista')
+    ->name('productos.lista');
 
 Route::get('/productos/{id}', 'ProductoController@detalles')
-    ->where('id', '[0-9]+');
+    ->where('id', '[0-9]+')
     /*Expresion regular que nos indica que solo
      * puede recibir numeros y que puede tener mas de un numero
      */
+    ->name('productos.detalles');
 
-Route::get('/productos/nuevo', 'ProductoController@nuevo');
+Route::get('/productos/nuevo', 'ProductoController@nuevo')
+    ->name('productos.añadir');
 
-Route::get('/productos/editar/{id}', 'ProductoController@editar');
+Route::get('/productos/editar/{id}', 'ProductoController@editar')
+    ->name('productos.modificar');
 
 /**
  * Rutas de Ingredientes
  */
 
-Route::get('/ingredientes', 'IngredienteController@lista');
+Route::get('/ingredientes', 'IngredienteController@lista')
+    ->name('ingredientes.lista');
 
-Route::get('/ingredientes/{id}', 'IngredienteController@detalles')
-    ->where('id', '[0-9]+');/*Expresion regular que nos indica que solo
+Route::post('/ingredientes/crear', 'IngredienteController@crear')
+    ->name('ingredientes.crear');
+
+Route::get('/ingredientes/{ing}', 'IngredienteController@detalles')
+    ->name('ingredientes.detalles')
+    ->where('ing', '[0-9]+');/*Expresion regular que nos indica que solo
  * puede recibir numeros y que puede tener mas de un numero
  */
 
 
-Route::get('/ingredientes/nuevo', 'IngredienteController@nuevo');
+Route::get('/ingredientes/nuevo', 'IngredienteController@nuevo')
+    ->name('ingredientes.añadir');
 
-Route::get('/ingredientes/editar/{id}', 'IngredienteController@editar');
+Route::get('/ingredientes/editar/{ing}', 'IngredienteController@editar')
+    ->name('ingredientes.modificar');
 
 /**
  * Rutas de Deposito

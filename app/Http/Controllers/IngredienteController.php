@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingrediente;
+use App\User;
 use Illuminate\Http\Request;
 
 class IngredienteController extends Controller
@@ -15,13 +16,16 @@ class IngredienteController extends Controller
         return view('ingredientes.lista',compact('titulo','ingredientes'));
     }
 
-    function detalles($id){
-        $ing = Ingrediente::find($id);
+    function detalles(Ingrediente $ing){
         return view('detalles',compact('ing'));
     }
 
     function nuevo(){
-        return "Nuevo ingredientes";
+        return view('añadir');
+    }
+
+    function crear(){
+        return "Procesando Informacion...";
     }
 
     function editar($id){
