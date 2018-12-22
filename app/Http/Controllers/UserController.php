@@ -21,10 +21,10 @@ class UserController extends Controller
 
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'], // SI NO TIENE NINGUNA RESTRICCION SE LE DEJA 'email' => ''
+            'password' => ['required','min:6'],
         ], [
-            'name.required' => 'El campo nombre es obligatorio'
+            'name.required' => 'El campo nombre es obligatorio',
         ]);
 
         User::create([
@@ -34,5 +34,30 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('user.lista');
+    }
+
+    function detalles(User $user){
+        return view('user.detalles',compact('user'));
+    }
+
+    function editar(User $user){
+        return view('user.editar', ['user' => $user]);
+    }
+
+    function actualizar(User $user){
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'], // SI NO TIENE NINGUNA RESTRICCION SE LE DEJA 'email' => ''
+            'password' => ['required','min:6'],
+        ], [
+            'name.required' => 'El campo nombre es obligatorio',
+        ]);
+
+        $data['password'] = bcrypt($data['password']);
+
+        $user->update($data);
+
+        return redirect(route('user.detalles',$user));
+
     }
 }

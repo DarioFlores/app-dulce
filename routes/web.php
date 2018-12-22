@@ -35,8 +35,17 @@ Route::get('/user', 'UserController@lista')
 Route::get('/user/registrar', 'UserController@registrar')
     ->name('user.registrar');
 
+Route::put('/user/{user}/actualizar', 'UserController@actualizar')
+    ->name('user.actualizar');
+
 Route::post('/user/crear', 'UserController@crear')
     ->name('user.crear');
+
+Route::get('/user/{user}/editar', 'UserController@editar')
+    ->name('user.editar');
+
+Route::get('/user/{user}/detalles', 'UserController@detalles')
+    ->name('user.detalles');
 
 
 /**

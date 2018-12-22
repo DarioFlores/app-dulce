@@ -13,13 +13,13 @@
                         {{ $u->email }}
                     </p>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <a  class="btn btn-info" href="{{ route('ingredientes.modificar', ['id' => $u->id]) }}">
+                        <a  class="btn btn-info" href="{{ route('user.editar', ['id' => $u->id]) }}">
                             <i class="material-icons">edit</i>
                         </a>
-                        <a  class="btn btn-info" href="{{ route('ingredientes.detalles', ['id' => $u->id]) }}">
+                        <a  class="btn btn-info" href="{{ route('user.editar', ['id' => $u->id]) }}">
                             <i class="material-icons">delete</i>
                         </a>
-                        <a  class="btn btn-info" href="{{ route('ingredientes.detalles', ['id' => $u->id]) }}">
+                        <a  class="btn btn-info" href="{{ route('user.detalles', ['id' => $u->id]) }}">
                             <i class="material-icons">info</i>
                         </a>
                     </div>

@@ -17,7 +17,7 @@ class IngredientesSeeder extends Seeder
         ]);
         **/
 
-        factory(Ingrediente::class, 50)->create();
+        //factory(Ingrediente::class, 50)->create();
 
     }
 }
