@@ -166,8 +166,9 @@ class UserModuleTest extends TestCase
      */
     public function mostrar_formulario_editar_user()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
-        $this->get("/user/{$user->id}/editar")
+        $this->get(route('user.editar', $user))
             ->assertStatus(200)
             ->assertViewIs('user.editar')
             ->assertSee('Editar Usuario')
@@ -271,69 +272,92 @@ class UserModuleTest extends TestCase
     /**
      * @test
      */
-    public function el_email_ya_existe_cuando_se_actualice_usuario()
+    public function el_email_ya_existe_cuando_se_actualiza()
     {
 
-        self::markTestIncomplete();
-        return;
         factory(User::class)->create([
-            'email' => 'pablin@gmail.com'
+            'email' => 'email_existente@example.com'
         ]);
 
-        $n = User::count();
+        $user = factory(User::class)->create([
+            'email' => 'email_viejo@example.com'
+        ]);
 
-        $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+        $this->from(route('user.editar', $user))
+            ->put(route('user.actualizar', $user), [
                 'name' => 'Pablo',
-                'email' => 'pablin@gmail.com',
+                'email' => 'email_existente@example.com',
                 'password' => '123456'
-            ])->assertRedirect(route('user.registrar'))
+            ])->assertRedirect(route('user.editar', $user))
             ->assertSessionHasErrors(['email']);
 
-        $this->assertEquals($n,User::count());
 
     }
 
     /**
      * @test
      */
-    public function el_contraseña_es_requerido_cuando_se_actualice_usuario()
+    public function el_email_cuando_es_el_mismo_es_opcional_cuando_se_actualice_usuario()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'email' => 'pabli22n@gmail.com'
+        ]);
 
         $this->from(route('user.editar', $user))
             ->put(route('user.actualizar',$user), [
                 'name' => 'Pablis',
-                'email' => 'pablin@gmail.com',
-                'password' => ''
+                'email' => 'pabli22n@gmail.com',
+                'password' => '4889446565'
             ])
-            ->assertRedirect(route('user.editar',$user))
-            ->assertSessionHasErrors(['password']);
+            ->assertRedirect(route('user.detalles',$user));
 
-        $this->assertDatabaseMissing('users', [
+        $this->assertDatabaseHas('users',[
             'name' => 'Pablis',
+            'email' => 'pabli22n@gmail.com',
         ]);
     }
 
-
     /**
      * @test
      */
-    public function el_contraseña_requiere_tamaña_minimo_de_6_caracteres_cuando_se_actualice_usuario()
+    public function la_contraseña_es_opcional_cuando_se_actualice_usuario()
     {
-        $user = factory(User::class)->create();
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create([
+            'password' => bcrypt('CLAVE_ANTERIOR')
+        ]);
 
         $this->from(route('user.editar', $user))
             ->put(route('user.actualizar',$user), [
                 'name' => 'Pablis',
-                'email' => 'pablin@gmail.com',
-                'password' => '1223'
+                'email' => 'pabli22222n@gmail.com',
+                'password' => ''
             ])
-            ->assertRedirect(route('user.editar',$user))
-            ->assertSessionHasErrors(['password']);
+            ->assertRedirect(route('user.detalles',$user));
 
-        $this->assertDatabaseMissing('users', [
+        $this->assertCredentials([
             'name' => 'Pablis',
+            'email' => 'pabli22222n@gmail.com',
+            'password' => 'CLAVE_ANTERIOR'
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function la_eliminacion_de_usuario()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create([
+            'email' => 'example@example.com'
+        ]);
+
+        $this->delete(route('user.eliminar', $user))
+            ->assertRedirect(route('user.lista'));
+
+        $this->assertDatabaseMissing('users',[
+            'id' => $user->id,
+            'email' => 'example@example.com'
         ]);
     }
 }
