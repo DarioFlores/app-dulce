@@ -16,10 +16,14 @@
                         <a  class="btn btn-info" href="{{ route('user.editar', ['id' => $u->id]) }}">
                             <i class="material-icons">edit</i>
                         </a>
-                        <a  class="btn btn-info" href="{{ route('user.editar', ['id' => $u->id]) }}">
-                            <i class="material-icons">delete</i>
-                        </a>
-                        <a  class="btn btn-info" href="{{ route('user.detalles', ['id' => $u->id]) }}">
+                        <form action="{{ route('user.eliminar', $u) }}" method="post">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-info" href="{{ route('user.eliminar', ['id' => $u->id]) }}">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </form>
+                        <a class="btn btn-info" href="{{ route('user.detalles', ['id' => $u->id]) }}">
                             <i class="material-icons">info</i>
                         </a>
                     </div>

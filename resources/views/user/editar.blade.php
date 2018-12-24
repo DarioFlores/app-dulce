@@ -14,7 +14,8 @@
             </div>
         @endif
 
-        <form method="post" action=" {{ route('user.crear') }}" class="needs-validation">
+        <form method="post" action=" {{ route('user.actualizar', $user) }}">
+            {{ method_field('PUT') }}
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">Nombre:</label>
