@@ -25,10 +25,6 @@
                 <label for="email">Email address:</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}">
             </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" name="password">
-            </div>
             <button type="submit" class="btn btn-default">Actualizar</button>
             <a  class="btn btn-info" href="{{ route('user.lista') }}">
                 <i class="material-icons">arrow_back</i>

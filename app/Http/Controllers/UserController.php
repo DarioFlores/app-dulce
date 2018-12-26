@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,8 +19,8 @@ class UserController extends Controller
         return view('user.añadir');
     }
 
-    function crear(){
-
+    function crear(UserRequest $request){
+        /**
         $data = request()->validate([
             'name' => 'required',
             'email' => ['required', 'email', 'unique:users,email'], // SI NO TIENE NINGUNA RESTRICCION SE LE DEJA 'email' => ''
@@ -27,14 +28,24 @@ class UserController extends Controller
         ], [
             'name.required' => 'El campo nombre es obligatorio',
         ]);
+        **/
 
+        $user = new User;
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        /**
         User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
         ]);
+        **/
 
-        return redirect()->route('user.lista');
+        $user->save();
+
+        return redirect()->route('user.lista')->with('info', 'Se creo con exito el usuario.');
     }
 
     function detalles(User $user){
@@ -45,30 +56,31 @@ class UserController extends Controller
         return view('user.editar', ['user' => $user]);
     }
 
-    function actualizar(User $user){
+    function actualizar(Request $request,User $user){
 
-        $data = request()->validate([
+        $data = $request->validate([
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users','email')->ignore($user->id)], // SI NO TIENE NINGUNA RESTRICCION SE LE DEJA 'email' => ''
             'password' => '',
         ], [
-            'name.required' => 'El campo nombre es obligatorio',
+            'name.required' => 'El campo nombre es obligatorio.',
+            'email.required' =>'El campo e-mail es obligatorio.',
+            'email.email' => 'Ingrese un e-mail valido.',
+            'email.unique' => 'Este e-mail ya esta en uso.',
         ]);
 
-        if ($data['password'] != null){
-            $data['password'] = bcrypt($data['password']);
-        } else{
-            unset($data['password']);
-        }
+        //$user->update($data);
+        $user->name = $data['name'];
+        $user->email = $data['email'];
 
-        $user->update($data);
+        $user->save();
 
-        return redirect(route('user.detalles',$user));
+        return redirect(route('user.detalles',$user))->with('info', 'Se actualizo con exito el usuario '.$user->name.'.');
     }
 
     function eliminar(User $user)
     {
         $user->delete();
-        return redirect(route('user.lista'));
+        return redirect(route('user.lista'))->with('info', 'Se elimino con exito el usuario '.$user->name.'.');
     }
 }

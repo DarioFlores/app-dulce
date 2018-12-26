@@ -15,7 +15,7 @@ class UserModuleTest extends TestCase
      */
     public function mostrar_formulario_añadir_user()
     {
-        $this->get('/user/registrar')
+        $this->get(route('user.registrar'))
             ->assertStatus(200)
             ->assertSee('Añadir nuevo Usuario');
     }
@@ -49,15 +49,15 @@ class UserModuleTest extends TestCase
     public function el_nombre_es_requerido()
     {
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => '',
-                'email' => 'pablin@gmail.com',
+                'email' => 'pabl22in@gmail.com',
                 'password' => '123456'
             ])->assertRedirect(route('user.registrar'))
-              ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio']);
+              ->assertSessionHasErrors(['name' => 'El campo nombre es obligatorio.']);
 
         $this->assertDatabaseMissing('users', [
-            'email' => 'pablin@gmail.com',
+            'email' => 'pabl22in@gmail.com',
         ]);
 
     }
@@ -68,12 +68,12 @@ class UserModuleTest extends TestCase
     public function el_email_es_requerido()
     {
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => 'Pablo',
                 'email' => '',
                 'password' => '123456'
             ])->assertRedirect(route('user.registrar'))
-            ->assertSessionHasErrors(['email']);
+            ->assertSessionHasErrors(['email' => 'El campo e-mail es obligatorio.']);
 
         $this->assertDatabaseMissing('users', [
             'name' => 'Pablo',
@@ -87,7 +87,7 @@ class UserModuleTest extends TestCase
     public function el_email_no_es_valido()
     {
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => 'Pablo',
                 'email' => 'email-no-valido',
                 'password' => '123456'
@@ -113,7 +113,7 @@ class UserModuleTest extends TestCase
         $n = User::count();
 
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => 'Pablo',
                 'email' => 'pablin@gmail.com',
                 'password' => '123456'
@@ -130,7 +130,7 @@ class UserModuleTest extends TestCase
     public function el_contraseña_es_requerido()
     {
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => 'Pablo',
                 'email' => 'pablin@gmail.com',
                 'password' => ''
@@ -149,7 +149,7 @@ class UserModuleTest extends TestCase
     public function el_contraseña_requiere_tamaña_minimo_de_6_caracteres()
     {
         $this->from(route('user.registrar'))
-            ->post('/user/crear', [
+            ->post(route('user.crear'), [
                 'name' => 'Pablo',
                 'email' => 'pablin@gmail.com',
                 'password' => '122'
@@ -184,17 +184,16 @@ class UserModuleTest extends TestCase
     {
         $user = factory(User::class)->create();
         //ESPERAMOS QUE CUANDO MANDENOS ESTOS DATOS POR EL FORMULARIO NOS REDIRECCIONE A LA LISTA DE INGREDIENTES
-        $this->put(route('user.actualizar',$user), [
+        $this->from(route('user.editar', $user))
+            ->put(route('user.actualizar',$user), [
             'name' => 'Gisella',
             'email' => 'gichu@gmail.com',
-            'password' => '123456',
         ])->assertRedirect(route('user.detalles', $user));
 
         // ESPERAMOS ENCONTRAR EN LA BASE DE DATOS UN INGREDIENTE CON ESTOS ATRIBUTOS
-        $this->assertCredentials([
+        $this->assertDatabaseHas('users',[
             'name' => 'Gisella',
             'email' => 'gichu@gmail.com',
-            'password' => '123456'   //ESTE METODO AYUDA CUANDO TENEMOS ENCRIPTADO UN DATO
         ]);
     }
 
@@ -209,7 +208,6 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar',$user), [
                 'name' => '',
                 'email' => 'pabli2n@gmail.com',
-                'password' => '123456'
             ])
             ->assertRedirect(route('user.editar',$user))
             ->assertSessionHasErrors(['name']);
@@ -236,7 +234,6 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar',$user), [
                 'name' => 'Pablis',
                 'email' => '',
-                'password' => '123456'
             ])
             ->assertRedirect(route('user.editar',$user))
             ->assertSessionHasErrors(['email']);
@@ -258,7 +255,6 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar',$user), [
                 'name' => 'Pablis',
                 'email' => 'no-valido',
-                'password' => '123456'
             ])
             ->assertRedirect(route('user.editar',$user))
             ->assertSessionHasErrors(['email']);
@@ -287,7 +283,6 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar', $user), [
                 'name' => 'Pablo',
                 'email' => 'email_existente@example.com',
-                'password' => '123456'
             ])->assertRedirect(route('user.editar', $user))
             ->assertSessionHasErrors(['email']);
 
@@ -307,38 +302,12 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar',$user), [
                 'name' => 'Pablis',
                 'email' => 'pabli22n@gmail.com',
-                'password' => '4889446565'
             ])
             ->assertRedirect(route('user.detalles',$user));
 
         $this->assertDatabaseHas('users',[
             'name' => 'Pablis',
             'email' => 'pabli22n@gmail.com',
-        ]);
-    }
-
-    /**
-     * @test
-     */
-    public function la_contraseña_es_opcional_cuando_se_actualice_usuario()
-    {
-        $this->withoutExceptionHandling();
-        $user = factory(User::class)->create([
-            'password' => bcrypt('CLAVE_ANTERIOR')
-        ]);
-
-        $this->from(route('user.editar', $user))
-            ->put(route('user.actualizar',$user), [
-                'name' => 'Pablis',
-                'email' => 'pabli22222n@gmail.com',
-                'password' => ''
-            ])
-            ->assertRedirect(route('user.detalles',$user));
-
-        $this->assertCredentials([
-            'name' => 'Pablis',
-            'email' => 'pabli22222n@gmail.com',
-            'password' => 'CLAVE_ANTERIOR'
         ]);
     }
 

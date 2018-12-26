@@ -50,6 +50,7 @@ Route::put('/user/{user}', 'UserController@actualizar')
 Route::delete('/user/{user}','UserController@eliminar')
     ->name('user.eliminar');
 
+
 /**
  * Rutas de Productos
  */

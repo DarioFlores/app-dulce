@@ -4,21 +4,13 @@
     <main role="main" class="container" style="margin-top: 65px">
         <h1>Añadir nuevo Usuario</h1>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('errors.validacion')
 
         <form method="post" action=" {{ route('user.crear') }}" class="needs-validation">
             {{ csrf_field() }}
             <div class="form-group">
                 <label for="name">Nombre:</label>
-                <input type="name" class="form-control" id="name" name="name" value="{{ old('email') }}">
+                <input type="name" class="form-control" id="name" name="name" value="{{ old('name') }}">
             </div>
             <div class="form-group">
                 <label for="email">Email address:</label>
