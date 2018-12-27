@@ -75,7 +75,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect(route('user.detalles',$user))->with('info', 'Se actualizo con exito el usuario '.$user->name.'.');
+        return redirect(route('user.lista'))->with('info', 'Se actualizo con exito el usuario '.$user->name.'.');
     }
 
     function eliminar(User $user)
