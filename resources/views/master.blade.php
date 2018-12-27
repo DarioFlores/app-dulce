@@ -12,14 +12,16 @@
       <!-- Bootstrap core CSS -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+      @yield('estilo')
       <link href="css/starter-template.css" rel="stylesheet">
       <link href="css/album.css" rel="stylesheet">
       <link href="css/carousel.css" rel="stylesheet">
       <link href="css/oofcanvas.css" rel="stylesheet">
 
+
   </head>
 
-  <body class="bg-light">
+  <body class="bg-secondary">
 
   <header>
       @include('navbar')
@@ -29,7 +31,7 @@
   @yield('contenido')
 
 
-  @include('pie')
+  <!-- @include('pie') -->
 
       <!-- Bootstrap core JavaScript
       ================================================== -->

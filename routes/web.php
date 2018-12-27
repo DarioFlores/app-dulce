@@ -14,7 +14,7 @@
 //Entra a la primera URL que coincida
 
 Route::get('/', function () {
-    return view('productos.lista');
+    return redirect(route('home'));
 });
 
 /**
