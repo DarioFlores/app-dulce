@@ -19,7 +19,7 @@ class CreateIngredientesTable extends Migration
             $table->string('nombre');
             $table->unsignedInteger('marca_id');
             $table->unsignedInteger('unidad_id');
-            $table->integer('num_porcion');
+            $table->float('cantidad');
             $table->boolean('has_tacc');
             $table->string('cod_barra');
             $table->string('detalles');

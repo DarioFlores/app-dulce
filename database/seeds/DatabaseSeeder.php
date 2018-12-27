@@ -16,6 +16,11 @@ class DatabaseSeeder extends Seeder
             'unidads',
             'users',
             'ingredientes',
+            'categorias',
+            'moldes',
+            'productos',
+            'clientes',
+            'recetas',
         ]);
 
         // $this->call(UsersTableSeeder::class);
@@ -23,6 +28,11 @@ class DatabaseSeeder extends Seeder
         $this->call(UnidadSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(IngredientesSeeder::class);
+        $this->call(MoldeSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        $this->call(ProductoSeeder::class);
+        $this->call(ClienteSeeder::class);
+        $this->call(RecetaSeeder::class);
 
     }
 
