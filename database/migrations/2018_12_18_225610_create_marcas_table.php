@@ -18,6 +18,7 @@ class CreateMarcasTable extends Migration
 
             $table->string('nombre');
             $table->float('calidad');
+            $table->string('site');
 
             $table->timestamps();
         });

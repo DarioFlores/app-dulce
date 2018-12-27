@@ -188,7 +188,7 @@ class UserModuleTest extends TestCase
             ->put(route('user.actualizar',$user), [
             'name' => 'Gisella',
             'email' => 'gichu@gmail.com',
-        ])->assertRedirect(route('user.detalles', $user));
+        ])->assertRedirect(route('user.lista'));
 
         // ESPERAMOS ENCONTRAR EN LA BASE DE DATOS UN INGREDIENTE CON ESTOS ATRIBUTOS
         $this->assertDatabaseHas('users',[
@@ -303,7 +303,7 @@ class UserModuleTest extends TestCase
                 'name' => 'Pablis',
                 'email' => 'pabli22n@gmail.com',
             ])
-            ->assertRedirect(route('user.detalles',$user));
+            ->assertRedirect(route('user.lista'));
 
         $this->assertDatabaseHas('users',[
             'name' => 'Pablis',

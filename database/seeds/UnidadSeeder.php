@@ -12,7 +12,6 @@ class UnidadSeeder extends Seeder
      */
     public function run()
     {
-        /**
         factory(Unidad::class)->create([
             'nombre' => 'Litros',
             'simbolo' => 'L',
@@ -20,13 +19,12 @@ class UnidadSeeder extends Seeder
 
         factory(Unidad::class)->create([
             'nombre' => 'Unidades',
-            'simbolo' => 'Unid',
+            'simbolo' => 'U',
         ]);
 
         factory(Unidad::class)->create([
             'nombre' => 'Kilogramos',
             'simbolo' => 'Kg',
         ]);
-         **/
     }
 }

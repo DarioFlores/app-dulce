@@ -15,6 +15,6 @@ class HomeModuleTest extends TestCase
     {
         $this->get('/home')
             ->assertStatus(200)
-            ->assertSee('Resumen de todo lo importante');
+            ->assertSee('Inicia Session');
     }
 }

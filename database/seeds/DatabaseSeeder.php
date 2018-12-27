@@ -1,6 +1,5 @@
 <?php
 
-use App\Unidad;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->vaciarTablas([
             'marcas',
-            'ingredientes',
-            'users',
             'unidads',
+            'users',
+            'ingredientes',
         ]);
 
         // $this->call(UsersTableSeeder::class);
