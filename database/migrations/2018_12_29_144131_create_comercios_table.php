@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClientesTable extends Migration
+class CreateComerciosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('comercios', function (Blueprint $table) {
             $table->increments('id');
 
             $table->string('nombre');
-            $table->string('apellido');
-            $table->string('email');
-            $table->integer('confianza');
+            //$table->string('ofertas');
+            // https://www.tiendeo.com.ar/san-fernando-del-valle-de-catamarca/supermercados-vea
+            // https://www.tiendeo.com.ar/{ciudad}/{comercio}
 
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('comercios');
     }
 }

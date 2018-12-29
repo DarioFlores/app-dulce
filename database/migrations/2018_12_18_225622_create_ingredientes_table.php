@@ -23,6 +23,9 @@ class CreateIngredientesTable extends Migration
             $table->boolean('has_tacc');
             $table->string('cod_barra');
             $table->string('detalles');
+            //$table->string('ofertas');
+            // https://www.tiendeo.com.ar/san-fernando-del-valle-de-catamarca/ofertas/crema-de-leche
+            // https://www.tiendeo.com.ar/{ciudad}/ofertas/{producto}
 
 
             $table->foreign('marca_id')->references('id')->on('marcas');
