@@ -20,7 +20,15 @@ class DatabaseSeeder extends Seeder
             'moldes',
             'productos',
             'clientes',
+            'comercios',
             'recetas',
+            'cliente_telefonos',
+            'comercio_telefonos',
+            'cliente_domicilios',
+            'comercio_domicilios',
+            'movimientos',
+            'pedidos',
+            'productos_pedidos',
         ]);
 
         // $this->call(UsersTableSeeder::class);
@@ -31,9 +39,16 @@ class DatabaseSeeder extends Seeder
         $this->call(MoldeSeeder::class);
         $this->call(CategoriaSeeder::class);
         $this->call(ProductoSeeder::class);
-        $this->call(ClienteSeeder::class);
         $this->call(RecetaSeeder::class);
-
+        $this->call(ClienteSeeder::class);
+        $this->call(ComercioSeeder::class);
+        $this->call(ClienteTelefonoSeeder::class);
+        $this->call(ClienteDomicilioSeeder::class);
+        $this->call(ComercioTelefonoSeeder::class);
+        $this->call(ComercioDomicilioSeeder::class);
+        $this->call(MovimientoSeeder::class);
+        $this->call(PedidoSeeder::class);
+        $this->call(ProductosPedidoSeeder::class);
     }
 
     /**

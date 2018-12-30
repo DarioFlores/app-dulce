@@ -27,5 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
+    public function cliente(){
+        return $this->belongsTo(Cliente::class); //Un Ingrediente tiene una Unidad
+    }
 }

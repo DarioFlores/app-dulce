@@ -9,6 +9,6 @@ $factory->define(App\Pedido::class, function (Faker $faker) {
         'fecha'  => $faker->date(),
         'hora'  => $faker->time(),
         'pagado'  => $faker->boolean(),
-        'senia'  => $faker->randomFloat(),
+        'senia'  => $faker->randomFloat(4,1,300),
     ];
 });

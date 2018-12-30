@@ -21,4 +21,8 @@ class Producto extends Model
 
         //return Receta::where('producto_id', '=', $this->id)->get();
     }
+
+    public function pedidos(){
+        return $this->hasMany(ProductosPedido::class);
+    }
 }

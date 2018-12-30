@@ -16,7 +16,7 @@ class CreateClienteDomiciliosTable extends Migration
         Schema::create('cliente_domicilios', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->unsignedInteger('cliente_id')->nullable();
+            $table->unsignedInteger('cliente_id');
             $table->float('latitud')->nullable();
             $table->float('longitud')->nullable();
             $table->string('calle');
