@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             'clientes',
             'comercios',
             'recetas',
-            'cliente_telefonos',
-            'comercio_telefonos',
-            'cliente_domicilios',
-            'comercio_domicilios',
+            'telefonos',
+            'domicilios',
+            'comercio_cliente_domicilios',
+            'comercio_cliente_telefonos',
             'movimientos',
             'pedidos',
             'productos_pedidos',
@@ -42,10 +42,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RecetaSeeder::class);
         $this->call(ClienteSeeder::class);
         $this->call(ComercioSeeder::class);
-        $this->call(ClienteTelefonoSeeder::class);
-        $this->call(ClienteDomicilioSeeder::class);
-        $this->call(ComercioTelefonoSeeder::class);
-        $this->call(ComercioDomicilioSeeder::class);
+        $this->call(TelefonoSeeder::class);
+        $this->call(DomicilioSeeder::class);
+        $this->call(ComercioClienteDomicilioSeeder::class);
+        $this->call(ComercioClienteTelefonoSeeder::class);
         $this->call(MovimientoSeeder::class);
         $this->call(PedidoSeeder::class);
         $this->call(ProductosPedidoSeeder::class);

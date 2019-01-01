@@ -9,11 +9,11 @@ class Cliente extends Model
     protected $fillable = ['nombre', 'apellido', 'user_id'/*, 'confianza'*/];
 
     public function domicilios(){    //marca + _id
-        return $this->hasMany(ClienteDomicilio::class);
+        return $this->hasMany(ComercioClienteDomicilio::class);
     }
 
     public function telefonos(){    //marca + _id
-        return $this->hasMany(ClienteTelefono::class);
+        return $this->hasMany(ComercioClienteTelefono::class);
     }
 
     public function pedidos(){    //marca + _id
