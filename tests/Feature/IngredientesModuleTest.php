@@ -79,11 +79,11 @@ class IngredientesModuleTest extends TestCase
     /**
      * @test
      */
-    public function mostrar_formulario_añadir_ingrediente()
+    public function mostrar_formulario_nuevo_ingrediente()
     {
-        $this->get('/ingredientes/nuevo')
+        $this->get(route('ingredientes.nuevo'))
             ->assertStatus(200)
-            ->assertSee('Añadir nuevo Ingrediente');
+            ->assertSee('Datos de Ingrediente');
     }
 
     /**

@@ -1,8 +1,6 @@
 @extends('master')
 @section('titulo','Lista de Usuarios')
 @section('contenido')
-    <main role="main" class="container">
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h4 class="border-bottom border-gray pb-2 mb-0">{{ $titulo }}</h4>
 
             @include('info')
@@ -42,6 +40,4 @@
             <small class="d-block text-right mt-3">
                 <a href="#">All updates</a>
             </small>
-        </div>
-    </main>
 @endsection

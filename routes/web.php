@@ -87,7 +87,7 @@ Route::get('/ingredientes/{ing}', 'IngredienteController@detalles')
  * puede recibir numeros y que puede tener mas de un numero
  */
 Route::get('/ingredientes/nuevo', 'IngredienteController@nuevo')
-    ->name('ingredientes.añadir');
+    ->name('ingredientes.nuevo');
 
 Route::get('/ingredientes/editar/{ing}', 'IngredienteController@editar')
     ->name('ingredientes.modificar');

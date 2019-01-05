@@ -1,8 +1,6 @@
 @extends('master')
 @section('titulo','Añadir')
 @section('contenido')
-    <main role="main" class="container" style="margin-top: 65px">
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h1>Añadir nuevo Usuario</h1>
 
             @include('errors.validacion')
@@ -27,6 +25,4 @@
                 </a>
             </form>
 
-        </div>
-    </main>
 @endsection

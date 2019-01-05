@@ -1,8 +1,6 @@
 @extends('master')
 @section('titulo','Añadir')
 @section('contenido')
-    <main role="main" class="container" style="margin-top: 65px">
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h1>Editar Usuario</h1>
 
             @include('errors.validacion')
@@ -23,6 +21,4 @@
                     <i class="material-icons">arrow_back</i>
                 </a>
             </form>
-        </div>
-    </main>
 @endsection

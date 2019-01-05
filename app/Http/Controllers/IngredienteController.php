@@ -21,7 +21,7 @@ class IngredienteController extends Controller
     }
 
     function nuevo(){
-        return view('añadir');
+        return view('ingredientes.nuevo');
     }
 
     function crear(){

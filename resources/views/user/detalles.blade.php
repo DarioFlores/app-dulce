@@ -1,8 +1,6 @@
 @extends('master')
 @section('titulo','Detalles')
 @section('contenido')
-    <main role="main" class="container" style="margin-top: 65px">
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
             <h6 class="border-bottom border-gray pb-2 mb-0">{{ $user->name }}</h6>
 
                 <div class="media text-muted pt-3">
@@ -14,7 +12,5 @@
                         <i class="material-icons">arrow_back</i>
                     </a>
                 </div>
-        </div>
-    </main>
 
 @endsection
