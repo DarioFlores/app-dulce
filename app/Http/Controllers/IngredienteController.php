@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredienteNuevoRequest;
 use App\Ingrediente;
 use App\User;
 use Illuminate\Http\Request;
@@ -24,16 +25,25 @@ class IngredienteController extends Controller
         return view('ingredientes.nuevo');
     }
 
-    function crear(){
+    function crear(IngredienteNuevoRequest $request){
 
-        $data = request()->all();
+        $ing = new Ingrediente();
 
-        Ingrediente::create([
-            'nombre' => $data['nombre'],
-            'marca_id' => $data['marca_id']
-        ]);
 
-        return redirect()->route('ingredientes.lista');
+        $ing->nombre = $request->input('nombre');
+        $ing->cantidad = $request->input('cantidad');
+        $ing->unidad_id = $request->input('unidad_id');
+        $ing->detalles = $request->input('detalles');
+        $ing->cod_barra = $request->input('cod_barra');
+        $ing->has_tacc = $request->input('has_tacc');
+        $ing->marca_id = $request->input('marca_id');
+
+
+        $ing->save();
+
+        return redirect()
+                ->route('ingredientes.lista')
+                ->with('info', 'Se creo con exito el nuevo ingrediente.');
     }
 
     function editar($id){

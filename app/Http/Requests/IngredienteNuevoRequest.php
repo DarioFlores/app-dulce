@@ -24,14 +24,13 @@ class IngredienteNuevoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'    => ['require'],
-            'cantidad'  => ['require'],
-            'unidad'    => ['require'],
-            'detalle'   => [''],
-            'cod_barra' => [''],
+            'nombre'    => 'required',
+            'cantidad'  => ['required'],
+            'unidad_id'    => ['required'],
+            'detalles'   => [''],
+            'cod_barra' => ['max:13'],
             'has_tacc'  => [''],
-            'marca'     => ['required'],
-            'calidad'   => [''],
+            'marca_id'     => ['required'],
         ];
     }
 
@@ -45,12 +44,11 @@ class IngredienteNuevoRequest extends FormRequest
         return [
             'nombre'    => 'nombre del ingrediente',
             'cantidad'  => 'cantidad del ingrediente',
-            'unidad'    => 'unidad del ingrediente',
-            'detalle'   => 'detalles del ingrediente',
+            'unidad_id'    => 'unidad del ingrediente',
+            'detalles'   => 'detalles del ingrediente',
             'cod_barra' => 'codigo de barra del ingrediente',
             'has_tacc'  => 'TACC',
-            'marca'     => 'nombre de la marca del ingrediente',
-            'calidad'   => 'calidad de la marca del ingrediente',
+            'marca_id'     => 'nombre de la marca del ingrediente',
         ];
     }
 
@@ -64,8 +62,9 @@ class IngredienteNuevoRequest extends FormRequest
         return [
             'nombre.required'   => 'El campo :attribute es obligatorio.',
             'cantidad.required' => 'El campo :attribute es obligatorio.',
-            'unidad.required'   => 'El campo :attribute es obligatorio.',
-            'marca.required'    => 'El campo :attribute es obligatorio.',
+            'unidad_id.required'   => 'El campo :attribute es obligatorio.',
+            'marca_id.required'    => 'El campo :attribute es obligatorio.',
+            'cod_barra.max'    => 'El campo :attribute debe tener como maximo :max caracteres.',
         ];
     }
 }

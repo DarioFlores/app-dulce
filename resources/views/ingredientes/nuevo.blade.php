@@ -18,16 +18,16 @@
                 <input type="number" class="form-control" id="cantidad" name="cantidad" value="{{ old('cantidad') }}">
             </div>
             <div class="form-group col-md-3">
-                <label for="unidad">Unidad:</label>
-                <select type="text" class="form-control" id="unidad" name="unidad" value="{{ old('unidad') }}">
+                <label for="unidad_id">Unidad:</label>
+                <select type="text" class="form-control" id="unidad_id" name="unidad_id" value="{{ old('unidad_id') }}">
                     <option>Elige una unidad</option>
                 </select>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="detalle">Detalle:</label>
-                <textarea class="form-control" id="detalle" name="detalle" rows="2" value="{{ old('cantidad') }}"></textarea>
+                <label for="detalles">Detalle:</label>
+                <textarea class="form-control" id="detalles" name="detalles" rows="2" value="{{ old('detalles') }}"></textarea>
             </div>
             <div class="form-group col-md-3">
                 <label for="cod_barra">Codigo de Barra:</label>
@@ -50,14 +50,10 @@
         <h5>Datos de Marca</h5>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="marca">Nombre:</label>
-                <select type="text" class="form-control" id="marca" name="marca" value="{{ old('marca') }}">
+                <label for="marca_id">Nombre:</label>
+                <select type="text" class="form-control" id="marca_id" name="marca_id" value="{{ old('marca_id') }}">
                     <option>Elige una marca</option>
                 </select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="calidad">Calidad:</label>
-                <input type="number" class="form-control" id="calidad" name="calidad" min="0" max="5" value="{{ old('calidad') }}">
             </div>
         </div>
 

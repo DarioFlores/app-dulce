@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Ingrediente;
 use App\Marca;
+use App\Unidad;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -83,31 +84,64 @@ class IngredientesModuleTest extends TestCase
     {
         $this->get(route('ingredientes.nuevo'))
             ->assertStatus(200)
+            ->assertViewIs('ingredientes.nuevo')
             ->assertSee('Datos de Ingrediente');
     }
 
     /**
      * @test
      */
-    public function añadir_nuevo_ingrediente()
+    public function crear_nuevo_ingrediente()
     {
         $this->withoutExceptionHandling();
-        factory(Marca::class, 8)->create();
-        $marca = Marca::first();
-        //ESPERAMOS QUE CUANDO MANDENOS ESTOS DATOS POR EL FORMULARIO NOS REDIRECCIONE A LA LISTA DE INGREDIENTES
-        $this->post('/ingredientes/crear', [
-            'nombre' => 'Leche',
-            'marca_id' => $marca->id,
+        $unidad = factory(Unidad::class)->create();
+        $marca = factory(Marca::class)->create();
+
+        $this->from(route('ingredientes.nuevo'))
+            ->post(route('ingredientes.crear'), [
+            'nombre'    => 'Leche',
+            'cantidad'  => '1',
+            'unidad_id'    => $unidad->id,
+            'detalles'   => 'Leche entera preferiblemente en caja para poder almacenarla.',
+            'cod_barra' => '7794710010017',
+            'has_tacc'  => '1',
+            'marca_id'     => $marca->id,
         ])->assertRedirect(route('ingredientes.lista'));
 
-        // ESPERAMOS ENCONTRAR EN LA BASE DE DATOS UN INGREDIENTE CON ESTOS ATRIBUTOS
-        $this->assertDatabaseHas('ingredientes',[
-            'nombre' => 'Leche',
-            'marca_id' => $marca->id,
+        $this->assertDatabaseHas('ingredientes', [
+            'nombre'    => 'Leche',
+            'cantidad'  => '1',
+            'unidad_id'    => $unidad->id,
+            'detalles'   => 'Leche entera preferiblemente en caja para poder almacenarla.',
+            'cod_barra' => '7794710010017',
+            'has_tacc'  => '1',
+            'marca_id'     => $marca->id,
         ]);
+    }
 
-        //PARA COMPROBAR SI UNA CONTRASEÑA ENCRITADA SE GUARDO CORRECTAMENTE SE USA
-        //$this->assertCredentials([/*ARRAY ASOCIATIVO CON LOS DATOS*/]);
+    /**
+     * @test
+     */
+    public function crear_nuevo_ingrediente_campos_requeridos()
+    {
+        $this->withoutExceptionHandling();
+        $unidad = factory(Unidad::class)->create();
+        $marca = factory(Marca::class)->create();
 
+        $this->from(route('ingredientes.nuevo'))
+            ->post(route('ingredientes.crear'), [
+                'nombre'    => 'Leche',
+                'cantidad'  => '1',
+                'unidad_id' => $unidad->id,
+                'marca_id'  => $marca->id,
+                'has_tacc'  => '0'
+            ])->assertRedirect(route('ingredientes.lista'));
+
+        $this->assertDatabaseHas('ingredientes', [
+            'nombre'    => 'Leche',
+            'cantidad'  => '1',
+            'unidad_id'    => $unidad->id,
+            'marca_id'     => $marca->id,
+        ]);
     }
 }

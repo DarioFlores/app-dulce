@@ -20,9 +20,9 @@ class CreateIngredientesTable extends Migration
             $table->unsignedInteger('marca_id');
             $table->unsignedInteger('unidad_id');
             $table->float('cantidad');
-            $table->boolean('has_tacc');
-            $table->string('cod_barra');
-            $table->string('detalles');
+            $table->boolean('has_tacc')->default(0);
+            $table->string('cod_barra')->nullable();
+            $table->string('detalles')->nullable();
             //$table->string('ofertas');
             // https://www.tiendeo.com.ar/san-fernando-del-valle-de-catamarca/ofertas/crema-de-leche
             // https://www.tiendeo.com.ar/{ciudad}/ofertas/{producto}
